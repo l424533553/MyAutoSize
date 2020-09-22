@@ -28,7 +28,6 @@ import android.view.View;
 
 import java.util.Locale;
 
-import me.jessyan.autosize.config.InitProvider;
 import me.jessyan.autosize.external.ExternalAdaptInfo;
 import me.jessyan.autosize.external.ExternalAdaptManager;
 import me.jessyan.autosize.internal.CancelAdapt;
@@ -176,7 +175,6 @@ public final class AutoSize {
      *                      {@param sizeInDp} 则应该填写设计图的总宽度, 如果 {@param isBaseOnWidth} 设置为 {@code false},
      *                      {@param sizeInDp} 则应该填写设计图的总高度
      * @param isBaseOnWidth 是否按照宽度进行等比例适配, {@code true} 为以宽度进行等比例适配, {@code false} 为以高度进行等比例适配
-     * @see <a href="https://mp.weixin.qq.com/s/d9QCoBP6kV9VSWvVldVVwA">今日头条官方适配方案</a>
      */
     public static void autoConvertDensity(Activity activity, float sizeInDp, boolean isBaseOnWidth) {
         Preconditions.checkNotNull(activity, "activity == null");
@@ -195,10 +193,10 @@ public final class AutoSize {
 
         DisplayMetricsInfo displayMetricsInfo = mCache.get(key);
 
-        float targetDensity = 0;
-        int targetDensityDpi = 0;
-        float targetScaledDensity = 0;
-        float targetXdpi = 0;
+        float targetDensity;
+        int targetDensityDpi;
+        float targetScaledDensity;
+        float targetXdpi;
         int targetScreenWidthDp;
         int targetScreenHeightDp;
 
@@ -246,7 +244,7 @@ public final class AutoSize {
     }
 
     /**
-     * 取消适配
+     * 取消适配,将
      *
      * @param activity {@link Activity}
      */

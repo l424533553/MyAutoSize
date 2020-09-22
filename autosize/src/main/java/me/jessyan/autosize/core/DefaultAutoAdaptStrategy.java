@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize;
+package me.jessyan.autosize.core;
 
 import android.app.Activity;
 import android.app.Application;
 
 import java.util.Locale;
 
+import me.jessyan.autosize.AutoSize;
+import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.external.ExternalAdaptInfo;
 import me.jessyan.autosize.internal.CancelAdapt;
 import me.jessyan.autosize.internal.CustomAdapt;
+import me.jessyan.autosize.internal.OnAdaptListener;
 import me.jessyan.autosize.utils.AutoSizeLog;
 
 /**
@@ -41,7 +44,19 @@ public class DefaultAutoAdaptStrategy implements AutoAdaptStrategy {
 
     @Override
     public void applyAdapt(Object target, Activity activity) {
+        OnAdaptListener onAdaptListener = AutoSizeConfig.getInstance().getOnAdaptListener();
+        if (onAdaptListener != null) {
+            onAdaptListener.onAdaptBefore(target, activity);
+        }
 
+        autoAdapter(target, activity);
+
+        if (onAdaptListener != null) {
+            onAdaptListener.onAdaptAfter(target, activity);
+        }
+    }
+
+    private void autoAdapter(Object target, Activity activity) {
         //检查是否开启了外部三方库的适配模式, 只要不主动调用 ExternalAdaptManager 的方法, 下面的代码就不会执行
         if (AutoSizeConfig.getInstance().getExternalAdaptManager().isRun()) {
             if (AutoSizeConfig.getInstance().getExternalAdaptManager().isCancelAdapt(target.getClass())) {
@@ -75,4 +90,5 @@ public class DefaultAutoAdaptStrategy implements AutoAdaptStrategy {
             AutoSize.autoConvertDensityOfGlobal(activity);
         }
     }
+
 }

@@ -24,7 +24,7 @@ import java.util.Locale;
 
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.config.OnAdaptListener;
+import me.jessyan.autosize.internal.OnAdaptListener;
 import me.jessyan.autosize.unit.Subunits;
 import me.jessyan.autosize.utils.AutoSizeLog;
 

@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize;
+package me.jessyan.autosize.core;
 
 import android.app.Activity;
-import android.app.Application;
 import android.util.DisplayMetrics;
 
 /**
  * ================================================
- * 屏幕适配逻辑策略类, 可通过 {@link AutoSizeConfig#init(Application, boolean, AutoAdaptStrategy)}
- * 和 {@link AutoSizeConfig#setAutoAdaptStrategy(AutoAdaptStrategy)} 切换策略
+ * 屏幕适配逻辑策略类, ActivityLifecycleCallbacksImpl中可以随时修改屏幕适配策略AutoAdaptStrategy
  *
  * @author LUOFAXIN
- * @see DefaultAutoAdaptStrategy
- * Created by JessYan on 2018/8/9 15:13
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
 public interface AutoAdaptStrategy {

@@ -41,6 +41,11 @@ import me.jessyan.autosize.utils.AutoSizeUtils;
  */
 public class CustomFragment1 extends Fragment implements CustomAdapt {
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

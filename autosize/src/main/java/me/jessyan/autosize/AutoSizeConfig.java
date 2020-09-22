@@ -27,8 +27,10 @@ import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
 
-import me.jessyan.autosize.config.OnAdaptListener;
-import me.jessyan.autosize.config.WrapperAutoAdaptStrategy;
+import me.jessyan.autosize.internal.OnAdaptListener;
+import me.jessyan.autosize.core.ActivityLifecycleCallbacksImp;
+import me.jessyan.autosize.core.AutoAdaptStrategy;
+import me.jessyan.autosize.core.DefaultAutoAdaptStrategy;
 import me.jessyan.autosize.external.ExternalAdaptManager;
 import me.jessyan.autosize.unit.Subunits;
 import me.jessyan.autosize.unit.UnitsManager;
@@ -52,8 +54,6 @@ public final class AutoSizeConfig {
     private static volatile AutoSizeConfig sInstance;
     private static final String KEY_DESIGN_WIDTH_IN_DP = "design_width_in_dp";
     private static final String KEY_DESIGN_HEIGHT_IN_DP = "design_height_in_dp";
-    public static final boolean DEPENDENCY_ANDROIDX;
-    public static final boolean DEPENDENCY_SUPPORT;
     private Application mApplication;
     /**
      * 用来管理外部三方库 {@link Activity} 的适配
@@ -126,7 +126,7 @@ public final class AutoSizeConfig {
      * {@link AutoSizeConfig #mActivityLifecycleCallbacks} 可用来代替在 BaseActivity 中加入适配代码的传统方式
      * {@link AutoSizeConfig #mActivityLifecycleCallbacks} 这种方案类似于 AOP, 面向接口, 侵入性低, 方便统一管理, 扩展性强, 并且也支持适配三方库的 {@link Activity}
      */
-    private ActivityLifecycleCallbacksImpl mActivityLifecycleCallbacks;
+    private ActivityLifecycleCallbacksImp mActivityLifecycleCallbacks;
     /**
      * 框架具有 热插拔 特性, 支持在项目运行中动态停止和重新启动适配功能
      *
@@ -165,11 +165,10 @@ public final class AutoSizeConfig {
      */
     private OnAdaptListener mOnAdaptListener;
 
-    static {
-        DEPENDENCY_ANDROIDX = findClassByClassName("androidx.fragment.app.FragmentActivity");
-        DEPENDENCY_SUPPORT = findClassByClassName("android.support.v4.app.FragmentActivity");
-    }
-
+    /**
+     * @param className 例如 androidx.fragment.app.FragmentActivity
+     * @return
+     */
     private static boolean findClassByClassName(String className) {
         boolean hasDependency;
         try {
@@ -203,12 +202,12 @@ public final class AutoSizeConfig {
     /**
      * v0.7.0 以后, 框架会在 APP 启动时自动调用此方法进行初始化, 使用者无需手动初始化, 初始化方法只能调用一次, 否则报错
      * 此方法默认使用以宽度进行等比例适配, 如想使用以高度进行等比例适配, 请调用 {@link #init(Application, boolean)}
-     *
+     * <p>
      * 只允许被调用一次, 否则会报错, 所以 {@link AutoSizeConfig #init(Application)} 的调用权限并没有设为 public, 不允许外部使用者调用
      *
      * @param application {@link Application}
      */
-    AutoSizeConfig init(Application application) {
+    public AutoSizeConfig init(Application application) {
         return init(application, true, null);
     }
 
@@ -231,7 +230,7 @@ public final class AutoSizeConfig {
      * @param isBaseOnWidth 详情请查看 {@link #isBaseOnWidth} 的注释
      * @param strategy      {@link AutoAdaptStrategy}, 传 {@code null} 则使用 {@link DefaultAutoAdaptStrategy}
      */
-    AutoSizeConfig init(final Application application, boolean isBaseOnWidth, AutoAdaptStrategy strategy) {
+    public AutoSizeConfig init(final Application application, boolean isBaseOnWidth, AutoAdaptStrategy strategy) {
         Preconditions.checkArgument(mInitDensity == -1, "AutoSizeConfig#init() can only be called once");
         Preconditions.checkNotNull(application, "application == null");
         this.mApplication = application;
@@ -285,7 +284,7 @@ public final class AutoSizeConfig {
             }
         });
         AutoSizeLog.d("initDensity = " + mInitDensity + ", initScaledDensity = " + mInitScaledDensity);
-        mActivityLifecycleCallbacks = new ActivityLifecycleCallbacksImpl(new WrapperAutoAdaptStrategy(strategy == null ? new DefaultAutoAdaptStrategy() : strategy));
+        mActivityLifecycleCallbacks = new ActivityLifecycleCallbacksImp(strategy == null ? new DefaultAutoAdaptStrategy() : strategy);
         application.registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
         if ("MiuiResources".equals(application.getResources().getClass().getSimpleName()) || "XResources".equals(application.getResources().getClass().getSimpleName())) {
             isMiui = true;
@@ -336,7 +335,7 @@ public final class AutoSizeConfig {
     public AutoSizeConfig setAutoAdaptStrategy(AutoAdaptStrategy autoAdaptStrategy) {
         Preconditions.checkNotNull(autoAdaptStrategy, "autoAdaptStrategy == null");
         Preconditions.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
-        mActivityLifecycleCallbacks.setAutoAdaptStrategy(new WrapperAutoAdaptStrategy(autoAdaptStrategy));
+        mActivityLifecycleCallbacks.setAutoAdaptStrategy(autoAdaptStrategy);
         return this;
     }
 
@@ -367,8 +366,9 @@ public final class AutoSizeConfig {
     /**
      * 在以屏幕高度为基准进行适配时,AutoSize会将屏幕总高度减去状态栏高度来做适配，如果是全屏展示内容，
      * 则可以考虑设置为true
+     *
      * @param useDeviceSize {@code true}为使用设备的实际尺寸 (包含状态栏),
-     * {@code false，默认} 为不使用设备的实际尺寸 (不包含状态栏)
+     *                      {@code false，默认} 为不使用设备的实际尺寸 (不包含状态栏)
      * @see #isUseDeviceSize 详情请查看这个字段的注释
      */
     public AutoSizeConfig setUseDeviceSize(boolean useDeviceSize) {
@@ -710,7 +710,7 @@ public final class AutoSizeConfig {
                 try {
                     applicationInfo = packageManager.getApplicationInfo(context
                             .getPackageName(), PackageManager.GET_META_DATA);
-                    if (applicationInfo != null && applicationInfo.metaData != null) {
+                    if (applicationInfo.metaData != null) {
                         if (applicationInfo.metaData.containsKey(KEY_DESIGN_WIDTH_IN_DP)) {
                             mDesignWidthInDp = (int) applicationInfo.metaData.get(KEY_DESIGN_WIDTH_IN_DP);
                         }

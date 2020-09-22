@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize.config;
+package me.jessyan.autosize.internal;
 
 import android.app.Activity;
 
