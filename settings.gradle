@@ -1,0 +1,3 @@
+include ':autosize'
+include ':app'
+rootProject.name = "MyAutoSize"
