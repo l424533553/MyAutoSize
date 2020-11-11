@@ -20,12 +20,12 @@ import android.app.Application;
 
 import java.util.Locale;
 
-import me.jessyan.autosize.AutoSize;
-import me.jessyan.autosize.AutoSizeConfig;
+import me.jessyan.autosize.expose.AutoSize;
+import me.jessyan.autosize.expose.AutoSizeConfig;
 import me.jessyan.autosize.external.ExternalAdaptInfo;
-import me.jessyan.autosize.internal.CancelAdapt;
-import me.jessyan.autosize.internal.CustomAdapt;
-import me.jessyan.autosize.internal.OnAdaptListener;
+import me.jessyan.autosize.expose.internal.CancelAdapt;
+import me.jessyan.autosize.expose.internal.CustomAdapt;
+import me.jessyan.autosize.expose.internal.OnAdaptListener;
 import me.jessyan.autosize.utils.AutoSizeLog;
 
 /**

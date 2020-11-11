@@ -25,9 +25,9 @@ import android.os.Looper;
  * ================================================
  * @author LUOFAXIN
  */
-public final class Preconditions {
+public final class Precondition {
 
-    private Preconditions() {
+    private Precondition() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 

@@ -56,4 +56,8 @@ public class HHH {
         activityDisplayMetrics.scaledDensity = targetScaleDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
     }
+
+    private void init(){
+        Application  application;
+    }
 }

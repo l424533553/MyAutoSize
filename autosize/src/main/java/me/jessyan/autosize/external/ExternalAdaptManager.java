@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.utils.Preconditions;
+import me.jessyan.autosize.expose.AutoSizeConfig;
+import me.jessyan.autosize.utils.Precondition;
 
 /**
  * ================================================
@@ -51,7 +51,7 @@ public class ExternalAdaptManager {
      * @param targetClass {@link Activity} class, Fragment class
      */
     public synchronized ExternalAdaptManager addCancelAdaptOfActivity(Class<?> targetClass) {
-        Preconditions.checkNotNull(targetClass, "targetClass == null");
+        Precondition.checkNotNull(targetClass, "targetClass == null");
         if (!isRun) {
             isRun = true;
         }
@@ -81,7 +81,7 @@ public class ExternalAdaptManager {
      * @param info        {@link ExternalAdaptInfo} 适配参数
      */
     public synchronized ExternalAdaptManager addExternalAdaptInfoOfActivity(Class<?> targetClass, ExternalAdaptInfo info) {
-        Preconditions.checkNotNull(targetClass, "targetClass == null");
+        Precondition.checkNotNull(targetClass, "targetClass == null");
         if (!isRun) {
             isRun = true;
         }
@@ -99,7 +99,7 @@ public class ExternalAdaptManager {
      * @return {@code true} 为存在, {@code false} 为不存在
      */
     public synchronized boolean isCancelAdapt(Class<?> targetClass) {
-        Preconditions.checkNotNull(targetClass, "targetClass == null");
+        Precondition.checkNotNull(targetClass, "targetClass == null");
         if (mCancelAdaptList == null) {
             return false;
         }
@@ -113,7 +113,7 @@ public class ExternalAdaptManager {
      * @return 如果返回 {@code null} 则说明该 {@link Activity} 没有提供自定义的适配参数
      */
     public synchronized ExternalAdaptInfo getExternalAdaptInfoOfActivity(Class<?> targetClass) {
-        Preconditions.checkNotNull(targetClass, "targetClass == null");
+        Precondition.checkNotNull(targetClass, "targetClass == null");
         if (mExternalAdaptInfos == null) {
             return null;
         }

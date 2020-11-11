@@ -18,7 +18,6 @@ package me.jessyan.autosize.utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -96,14 +95,12 @@ public class ScreenUtils {
 //            }
 //        }
         // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 17) {
-            try {
-                Point realSize = new Point();
-                Display.class.getMethod("getRealSize", Point.class).invoke(d, realSize);
-                widthPixels = realSize.x;
-                heightPixels = realSize.y;
-            } catch (Exception ignored) {
-            }
+        try {
+            Point realSize = new Point();
+            Display.class.getMethod("getRealSize", Point.class).invoke(d, realSize);
+            widthPixels = realSize.x;
+            heightPixels = realSize.y;
+        } catch (Exception ignored) {
         }
         size[0] = widthPixels;
         size[1] = heightPixels;
@@ -112,10 +109,8 @@ public class ScreenUtils {
 
     public static int getHeightOfNavigationBar(Context context) {
         //如果小米手机开启了全面屏手势隐藏了导航栏则返回 0
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            if (Settings.Global.getInt(context.getContentResolver(), "force_fsg_nav_bar", 0) != 0) {
-                return 0;
-            }
+        if (Settings.Global.getInt(context.getContentResolver(), "force_fsg_nav_bar", 0) != 0) {
+            return 0;
         }
         int realHeight = getRawScreenSize(context)[1];
         int displayHeight = getScreenSize(context)[1];

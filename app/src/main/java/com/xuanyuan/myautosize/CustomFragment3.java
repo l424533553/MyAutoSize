@@ -24,8 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import me.jessyan.autosize.AutoSize;
-import me.jessyan.autosize.internal.CustomAdapt;
+import me.jessyan.autosize.expose.AutoSize;
+import me.jessyan.autosize.expose.internal.CustomAdapt;
 
 /**
  * ================================================

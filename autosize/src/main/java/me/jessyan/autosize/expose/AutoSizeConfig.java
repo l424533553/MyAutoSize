@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize;
+package me.jessyan.autosize.expose;
 
 import android.app.Activity;
 import android.app.Application;
@@ -27,7 +27,7 @@ import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
 
-import me.jessyan.autosize.internal.OnAdaptListener;
+import me.jessyan.autosize.expose.internal.OnAdaptListener;
 import me.jessyan.autosize.core.ActivityLifecycleCallbacksImp;
 import me.jessyan.autosize.core.AutoAdaptStrategy;
 import me.jessyan.autosize.core.DefaultAutoAdaptStrategy;
@@ -35,7 +35,7 @@ import me.jessyan.autosize.external.ExternalAdaptManager;
 import me.jessyan.autosize.unit.Subunits;
 import me.jessyan.autosize.unit.UnitsManager;
 import me.jessyan.autosize.utils.AutoSizeLog;
-import me.jessyan.autosize.utils.Preconditions;
+import me.jessyan.autosize.utils.Precondition;
 import me.jessyan.autosize.utils.ScreenUtils;
 
 /**
@@ -195,7 +195,7 @@ public final class AutoSizeConfig {
     }
 
     public Application getApplication() {
-        Preconditions.checkNotNull(mApplication, "Please call the AutoSizeConfig#init() first");
+        Precondition.checkNotNull(mApplication, "Please call the AutoSizeConfig#init() first");
         return mApplication;
     }
 
@@ -231,8 +231,8 @@ public final class AutoSizeConfig {
      * @param strategy      {@link AutoAdaptStrategy}, 传 {@code null} 则使用 {@link DefaultAutoAdaptStrategy}
      */
     public AutoSizeConfig init(final Application application, boolean isBaseOnWidth, AutoAdaptStrategy strategy) {
-        Preconditions.checkArgument(mInitDensity == -1, "AutoSizeConfig#init() can only be called once");
-        Preconditions.checkNotNull(application, "application == null");
+        Precondition.checkArgument(mInitDensity == -1, "AutoSizeConfig#init() can only be called once");
+        Precondition.checkNotNull(application, "application == null");
         this.mApplication = application;
         this.isBaseOnWidth = isBaseOnWidth;
         final DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
@@ -303,7 +303,7 @@ public final class AutoSizeConfig {
      * 框架具有 热插拔 特性, 支持在项目运行中动态停止和重新启动适配功能
      */
     public void restart() {
-        Preconditions.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
+        Precondition.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
         synchronized (AutoSizeConfig.class) {
             if (isStop) {
                 mApplication.registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
@@ -317,7 +317,7 @@ public final class AutoSizeConfig {
      * 框架具有 热插拔 特性, 支持在项目运行中动态停止和重新启动适配功能
      */
     public void stop(Activity activity) {
-        Preconditions.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
+        Precondition.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
         synchronized (AutoSizeConfig.class) {
             if (!isStop) {
                 mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
@@ -333,8 +333,8 @@ public final class AutoSizeConfig {
      * @param autoAdaptStrategy {@link AutoAdaptStrategy}
      */
     public AutoSizeConfig setAutoAdaptStrategy(AutoAdaptStrategy autoAdaptStrategy) {
-        Preconditions.checkNotNull(autoAdaptStrategy, "autoAdaptStrategy == null");
-        Preconditions.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
+        Precondition.checkNotNull(autoAdaptStrategy, "autoAdaptStrategy == null");
+        Precondition.checkNotNull(mActivityLifecycleCallbacks, "Please call the AutoSizeConfig#init() first");
         mActivityLifecycleCallbacks.setAutoAdaptStrategy(autoAdaptStrategy);
         return this;
     }
@@ -346,7 +346,7 @@ public final class AutoSizeConfig {
      * @param onAdaptListener {@link OnAdaptListener}
      */
     public AutoSizeConfig setOnAdaptListener(OnAdaptListener onAdaptListener) {
-        Preconditions.checkNotNull(onAdaptListener, "onAdaptListener == null");
+        Precondition.checkNotNull(onAdaptListener, "onAdaptListener == null");
         mOnAdaptListener = onAdaptListener;
         return this;
     }
@@ -485,7 +485,7 @@ public final class AutoSizeConfig {
      * @return {@link #mDesignWidthInDp}
      */
     public int getDesignWidthInDp() {
-        Preconditions.checkArgument(mDesignWidthInDp > 0, "you must set " + KEY_DESIGN_WIDTH_IN_DP + "  in your AndroidManifest file");
+        Precondition.checkArgument(mDesignWidthInDp > 0, "you must set " + KEY_DESIGN_WIDTH_IN_DP + "  in your AndroidManifest file");
         return mDesignWidthInDp;
     }
 
@@ -495,7 +495,7 @@ public final class AutoSizeConfig {
      * @return {@link #mDesignHeightInDp}
      */
     public int getDesignHeightInDp() {
-        Preconditions.checkArgument(mDesignHeightInDp > 0, "you must set " + KEY_DESIGN_HEIGHT_IN_DP + "  in your AndroidManifest file");
+        Precondition.checkArgument(mDesignHeightInDp > 0, "you must set " + KEY_DESIGN_HEIGHT_IN_DP + "  in your AndroidManifest file");
         return mDesignHeightInDp;
     }
 
@@ -639,7 +639,7 @@ public final class AutoSizeConfig {
      * @param screenWidth 屏幕宽度
      */
     public AutoSizeConfig setScreenWidth(int screenWidth) {
-        Preconditions.checkArgument(screenWidth > 0, "screenWidth must be > 0");
+        Precondition.checkArgument(screenWidth > 0, "screenWidth must be > 0");
         mScreenWidth = screenWidth;
         return this;
     }
@@ -650,7 +650,7 @@ public final class AutoSizeConfig {
      * @param screenHeight 屏幕高度 (需要包含状态栏)
      */
     public AutoSizeConfig setScreenHeight(int screenHeight) {
-        Preconditions.checkArgument(screenHeight > 0, "screenHeight must be > 0");
+        Precondition.checkArgument(screenHeight > 0, "screenHeight must be > 0");
         mScreenHeight = screenHeight;
         return this;
     }
@@ -661,7 +661,7 @@ public final class AutoSizeConfig {
      * @param designWidthInDp 设计图宽度
      */
     public AutoSizeConfig setDesignWidthInDp(int designWidthInDp) {
-        Preconditions.checkArgument(designWidthInDp > 0, "designWidthInDp must be > 0");
+        Precondition.checkArgument(designWidthInDp > 0, "designWidthInDp must be > 0");
         mDesignWidthInDp = designWidthInDp;
         return this;
     }
@@ -672,7 +672,7 @@ public final class AutoSizeConfig {
      * @param designHeightInDp 设计图高度
      */
     public AutoSizeConfig setDesignHeightInDp(int designHeightInDp) {
-        Preconditions.checkArgument(designHeightInDp > 0, "designHeightInDp must be > 0");
+        Precondition.checkArgument(designHeightInDp > 0, "designHeightInDp must be > 0");
         mDesignHeightInDp = designHeightInDp;
         return this;
     }
@@ -683,7 +683,7 @@ public final class AutoSizeConfig {
      * @param statusBarHeight 状态栏高度
      */
     public AutoSizeConfig setStatusBarHeight(int statusBarHeight) {
-        Preconditions.checkArgument(statusBarHeight > 0, "statusBarHeight must be > 0");
+        Precondition.checkArgument(statusBarHeight > 0, "statusBarHeight must be > 0");
         mStatusBarHeight = statusBarHeight;
         return this;
     }

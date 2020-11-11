@@ -25,9 +25,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.internal.CancelAdapt;
-import me.jessyan.autosize.internal.CustomAdapt;
+import me.jessyan.autosize.expose.AutoSizeConfig;
+import me.jessyan.autosize.expose.internal.CancelAdapt;
+import me.jessyan.autosize.expose.internal.CustomAdapt;
 
 /**
  * ================================================

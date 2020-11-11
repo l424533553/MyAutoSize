@@ -21,7 +21,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
-import me.jessyan.autosize.AutoSizeConfig;
+import me.jessyan.autosize.expose.AutoSizeConfig;
 
 
 /**

@@ -20,7 +20,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.jessyan.autosize.internal.CustomAdapt;
+import me.jessyan.autosize.expose.internal.CustomAdapt;
 
 /**
  * ================================================

@@ -22,9 +22,9 @@ import android.util.DisplayMetrics;
 
 import java.util.Locale;
 
-import me.jessyan.autosize.AutoSize;
-import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.internal.OnAdaptListener;
+import me.jessyan.autosize.expose.AutoSize;
+import me.jessyan.autosize.expose.AutoSizeConfig;
+import me.jessyan.autosize.expose.internal.OnAdaptListener;
 import me.jessyan.autosize.unit.Subunits;
 import me.jessyan.autosize.utils.AutoSizeLog;
 

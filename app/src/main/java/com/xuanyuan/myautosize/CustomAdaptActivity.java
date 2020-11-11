@@ -20,10 +20,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import me.jessyan.autosize.internal.CustomAdapt;
+import androidx.appcompat.app.AppCompatActivity;
+
+import me.jessyan.autosize.expose.internal.CustomAdapt;
 
 
 /**
@@ -50,7 +50,7 @@ public class CustomAdaptActivity extends AppCompatActivity implements CustomAdap
     }
 
     /**
-     * 跳转到 {@link FragmentHost}, 展示项目内部的 {@link Fragment} 自定义适配参数的用法
+     * 跳转到 {@link FragmentHost}, 展示项目内部的 {@link androidx.fragment.app.Fragment} 自定义适配参数的用法
      *
      * @param view {@link View}
      */

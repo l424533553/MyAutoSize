@@ -17,7 +17,7 @@ package me.jessyan.autosize.unit;
 
 import android.util.DisplayMetrics;
 
-import me.jessyan.autosize.utils.Preconditions;
+import me.jessyan.autosize.utils.Precondition;
 
 /**
  * ================================================
@@ -107,7 +107,7 @@ public class UnitsManager {
      * @see #mDesignWidth 详情请查看这个字段的注释
      */
     public UnitsManager setDesignWidth(float designWidth) {
-        Preconditions.checkArgument(designWidth > 0, "designWidth must be > 0");
+        Precondition.checkArgument(designWidth > 0, "designWidth must be > 0");
         mDesignWidth = designWidth;
         return this;
     }
@@ -129,7 +129,7 @@ public class UnitsManager {
      * @see #mDesignHeight 详情请查看这个字段的注释
      */
     public UnitsManager setDesignHeight(float designHeight) {
-        Preconditions.checkArgument(designHeight > 0, "designHeight must be > 0");
+        Precondition.checkArgument(designHeight > 0, "designHeight must be > 0");
         mDesignHeight = designHeight;
         return this;
     }
@@ -212,7 +212,7 @@ public class UnitsManager {
      * @param supportSubunits {@link Subunits}
      */
     public UnitsManager setSupportSubunits(Subunits supportSubunits) {
-        mSupportSubunits = Preconditions.checkNotNull(supportSubunits,
+        mSupportSubunits = Precondition.checkNotNull(supportSubunits,
                  "The supportSubunits can not be null, use Subunits.NONE instead");
         return this;
     }

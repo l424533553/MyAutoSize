@@ -33,34 +33,18 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
+            android.libraryVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def fileName = "autosize.aar"
+                    outputFileName = fileName
+                }
+            }
 
-            /*         variant.outputs.all { output ->
-                         def outputFile = output.outputFile
-                         if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                             if ("release".equalsIgnoreCase(variant.buildType.name)) {
-                                 def buildTypeName = "release"
-                                 // 输出apk名称_版本_日期.apk
-                                 def version = "V${versionName}"
-                                 def apkName = "haiheng_acreditate_${variant.productFlavors[0].name}"
-                                 def fileName = "${apkName}_${version}_${buildTypeName}_${buildTime()}.apk"
-                                 outputFileName = fileName
-                             }
-                         } else if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                             if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                                 if ("release".equalsIgnoreCase(variant.buildType.name)) {
-                                     def buildTypeName = "release"
-                                     // 输出apk名称_版本_日期.apk
-                                     def version = "V${versionName}"
-                                     def apkName = "${variant.productFlavors[0].name}"
-                                     def fileName = "${apkName}_${version}_${buildTypeName}_${buildTime()}.apk"
-                                     outputFileName = fileName
-                                 }
-                             }
-                         }
-                 }*/
         }
     }
 
@@ -78,7 +62,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "androidx.core:core-ktx:1.3.2"
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()
