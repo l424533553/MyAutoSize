@@ -5,10 +5,8 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion 21
+        targetSdkVersion 30
         consumerProguardFiles 'proguard-rules.pro'
     }
 
