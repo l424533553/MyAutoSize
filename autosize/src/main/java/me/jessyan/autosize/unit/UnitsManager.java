@@ -61,6 +61,7 @@ public class UnitsManager {
      * 是否支持 dp 单位, 默认支持
      */
     private boolean isSupportDP = true;
+
     /**
      * 是否支持 sp 单位, 默认支持
      */
