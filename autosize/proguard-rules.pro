@@ -21,9 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 
--keep class me.jessyan.autosize.expose.** { *; }
--keep interface me.jessyan.autosize.*
-
+-keep class me.jessyan.autosize.expose.MyAutoSize { *; }
 
 ## 混淆规则解释  START  #################################################################
 
