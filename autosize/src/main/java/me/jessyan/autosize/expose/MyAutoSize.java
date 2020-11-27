@@ -32,9 +32,15 @@ public class MyAutoSize {
                 //如果为 false, 则会跟随系统设置中字体大小的改变, 默认为 false
 //                .setExcludeFontScale(true)
 
+                .setExcludeFontScale(true)
+//                .setPrivateFontScale(0.8f)
+                .setLog(false)
+                .setBaseOnWidth(true)
+                .setUseDeviceSize(true);
+
                 //区别于系统字体大小的放大比例, AndroidAutoSize 允许 APP 内部可以独立于系统字体大小之外，独自拥有全局调节 APP 字体大小的能力
                 //当然, 在 APP内您必须使用 sp 来作为字体的单位, 否则此功能无效, 不设置或将此值设为 0 则取消此功能
-                .setPrivateFontScale(0.8f);
+//                .setPrivateFontScale(0.8f);
     }
 
 }

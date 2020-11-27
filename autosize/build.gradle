@@ -40,7 +40,7 @@ android {
 
             android.libraryVariants.all { variant ->
                 variant.outputs.all { output ->
-                    def fileName = "autosize.aar"
+                    def fileName = "autosize_${buildTime()}.aar"
                     outputFileName = fileName
                 }
             }
@@ -52,6 +52,11 @@ android {
         warning 'InvalidPackage'
     }
 }
+
+static def buildTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
