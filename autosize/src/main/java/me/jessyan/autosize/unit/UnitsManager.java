@@ -17,6 +17,7 @@ package me.jessyan.autosize.unit;
 
 import android.util.DisplayMetrics;
 
+import me.jessyan.autosize.external.inface.Subunits;
 import me.jessyan.autosize.utils.Precondition;
 
 /**

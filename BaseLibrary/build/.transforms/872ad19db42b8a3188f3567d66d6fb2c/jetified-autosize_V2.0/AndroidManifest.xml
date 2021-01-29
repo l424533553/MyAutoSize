@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.jessyan.autosize"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="30" />
+
+    <application>
+        <provider
+            android:name="me.jessyan.autosize.expose.InitProvider"
+            android:authorities="${applicationId}.autosize-init-provider"
+            android:exported="false"
+            android:multiprocess="true" />
+
+        <!--
+            <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
+        -->
+
+    </application>
+
+</manifest>

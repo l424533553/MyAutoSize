@@ -1,3 +1,6 @@
 include ':autosize'
+include ':autosize_original'
 include ':app'
+include ':BaseLibrary'
+include ':autosize_V2.0'
 rootProject.name = "MyAutoSize"

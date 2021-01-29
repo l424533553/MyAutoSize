@@ -27,12 +27,11 @@ import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
 
-import me.jessyan.autosize.expose.internal.OnAdaptListener;
+import me.jessyan.autosize.external.inface.OnAdaptListener;
 import me.jessyan.autosize.core.ActivityLifecycleCallbacksImp;
 import me.jessyan.autosize.core.AutoAdaptStrategy;
 import me.jessyan.autosize.core.DefaultAutoAdaptStrategy;
-import me.jessyan.autosize.external.ExternalAdaptManager;
-import me.jessyan.autosize.unit.Subunits;
+import me.jessyan.autosize.external.inface.Subunits;
 import me.jessyan.autosize.unit.UnitsManager;
 import me.jessyan.autosize.utils.AutoSizeLog;
 import me.jessyan.autosize.utils.Precondition;
@@ -613,8 +612,7 @@ public final class AutoSizeConfig {
 
     /**
      * 区别于系统字体大小的放大比例, AndroidAutoSize 允许 APP 内部可以独立于系统字体大小之外，
-     * 独自拥有全局调节 APP 字体大小的能力
-     * 当然, 在 APP 内您必须使用 sp 来作为字体的单位, 否则此功能无效
+     * 独自拥有全局调节 APP 字体大小的能力。当然, 在 APP 内您必须使用 sp 来作为字体的单位, 否则此功能无效
      *
      * @param fontScale 字体大小放大的比例, 设为 0 则取消此功能
      */

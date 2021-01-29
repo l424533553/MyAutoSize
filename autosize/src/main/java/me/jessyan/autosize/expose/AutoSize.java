@@ -26,12 +26,12 @@ import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import java.util.Locale;
 
-import me.jessyan.autosize.external.ExternalAdaptInfo;
-import me.jessyan.autosize.external.ExternalAdaptManager;
-import me.jessyan.autosize.expose.internal.CancelAdapt;
-import me.jessyan.autosize.expose.internal.CustomAdapt;
+import me.jessyan.autosize.external.inface.CancelAdapt;
+import me.jessyan.autosize.external.inface.CustomAdapt;
 import me.jessyan.autosize.unit.DisplayMetricsInfo;
 import me.jessyan.autosize.utils.AutoSizeLog;
 import me.jessyan.autosize.utils.Precondition;
@@ -81,13 +81,10 @@ public final class AutoSize {
      *
      * @param application {@link Application}
      */
-    public static void checkAndInit(Application application) {
+    public static void checkAndInit(@NonNull Application application) {
         //检查是否初始化过，不能重复初始化，否则会报错
         if (!checkInit()) {
-            AutoSizeConfig.getInstance()
-                    .setLog(true)
-                    .init(application)
-                    .setUseDeviceSize(false);
+            AutoSizeConfig.getInstance().init(application);
         }
     }
 
@@ -277,7 +274,7 @@ public final class AutoSize {
      *
      * @param context {@link Context}
      */
-    public static void initCompatMultiProcess(Context context) {
+    public static void initCompatMultiProcess(@NonNull Context context) {
         context.getContentResolver().query(Uri.parse("content://" + context.getPackageName() + ".autosize-init-provider"), null, null, null, null);
     }
 

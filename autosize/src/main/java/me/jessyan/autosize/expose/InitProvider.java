@@ -22,8 +22,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
-import me.jessyan.autosize.expose.AutoSizeConfig;
-import me.jessyan.autosize.utils.AutoSizeUtils;
+import me.jessyan.autosize.external.AutoSizeUtils;
 
 /**
  * ================================================

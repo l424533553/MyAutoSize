@@ -20,14 +20,6 @@ import android.app.Application;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-import java.util.Locale;
-
-import me.jessyan.autosize.expose.AutoSize;
-import me.jessyan.autosize.expose.AutoSizeConfig;
-import me.jessyan.autosize.expose.internal.OnAdaptListener;
-import me.jessyan.autosize.unit.Subunits;
-import me.jessyan.autosize.utils.AutoSizeLog;
-
 
 /**
  * ================================================
@@ -63,39 +55,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AutoSize.initCompatMultiProcess(this);
-        AutoSize.checkAndInit(this);
-        AutoSizeConfig.getInstance()
-                .setCustomFragment(true)
-                .setExcludeFontScale(true)
-                .setPrivateFontScale(0.8f)
-                .setLog(false)
-                .setBaseOnWidth(true)
-                .setUseDeviceSize(true)
-                //屏幕适配监听器
-                .setOnAdaptListener(new OnAdaptListener() {
-                    @Override
-                    public void onAdaptBefore(Object target, Activity activity) {
-//                        AutoSizeConfig.getInstance().setScreenWidth(ScreenUtils.getScreenSize(activity)[0]);
-//                        AutoSizeConfig.getInstance().setScreenHeight(ScreenUtils.getScreenSize(activity)[1]);
-                        AutoSizeLog.d(String.format(Locale.ENGLISH, "%s onAdaptBefore!", target.getClass().getName()));
-                    }
-
-                    @Override
-                    public void onAdaptAfter(Object target, Activity activity) {
-                        AutoSizeLog.d(String.format(Locale.ENGLISH, "%s onAdaptAfter!", target.getClass().getName()));
-                    }
-                });
-        configUnits();
     }
 
-    private void configUnits() {
-        AutoSizeConfig.getInstance()
-                .getUnitsManager()
-                .setSupportDP(true)
-                .setDesignSize(2160, 3840)
-                .setSupportSP(true)
-                .setSupportSubunits(Subunits.MM);
-    }
+
 
 }

@@ -24,12 +24,12 @@ android {
     }
 
 
-    android.libraryVariants.all { variant ->
-        variant.outputs.all { output ->
-            def fileName = "autosize.aar"
-            outputFileName = fileName
-        }
-    }
+//    android.libraryVariants.all { variant ->
+//        variant.outputs.all { output ->
+//            def fileName = "autosize.aar"
+//            outputFileName = fileName
+//        }
+//    }
 
     buildTypes {
         release {
@@ -40,7 +40,8 @@ android {
 
             android.libraryVariants.all { variant ->
                 variant.outputs.all { output ->
-                    def fileName = "autosize_${buildTime()}.aar"
+                    def apkName = "autosize"
+                    def fileName = "${apkName}_V2.0_${buildTime()}.aar"
                     outputFileName = fileName
                 }
             }

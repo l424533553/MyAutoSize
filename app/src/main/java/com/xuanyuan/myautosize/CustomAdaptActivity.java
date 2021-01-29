@@ -23,7 +23,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.jessyan.autosize.expose.internal.CustomAdapt;
+import me.jessyan.autosize.external.inface.CustomAdapt;
 
 
 /**

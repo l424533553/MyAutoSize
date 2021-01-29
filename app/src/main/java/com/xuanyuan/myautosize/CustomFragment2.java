@@ -24,8 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import me.jessyan.autosize.expose.AutoSize;
-import me.jessyan.autosize.expose.internal.CustomAdapt;
+
+import me.jessyan.autosize.external.MyAutoSize;
+import me.jessyan.autosize.external.inface.CustomAdapt;
+
 
 /**
  * ================================================
@@ -35,7 +37,7 @@ import me.jessyan.autosize.expose.internal.CustomAdapt;
  * ================================================
  * @author LUOFAXIN
  */
-public class CustomFragment2 extends Fragment implements CustomAdapt{
+public class CustomFragment2 extends Fragment implements CustomAdapt {
 
     @Nullable
     @Override
@@ -43,7 +45,7 @@ public class CustomFragment2 extends Fragment implements CustomAdapt{
         //由于某些原因, 屏幕旋转后 Fragment 的重建, 会导致框架对 Fragment 的自定义适配参数失去效果
         //所以如果您的 Fragment 允许屏幕旋转, 则请在 onCreateView 手动调用一次 AutoSize.autoConvertDensity()
         //如果您的 Fragment 不允许屏幕旋转, 则可以将下面调用 AutoSize.autoConvertDensity() 的代码删除掉
-        AutoSize.autoConvertDensity(getActivity(), 720, true);
+        MyAutoSize.autoConvertDensity(getActivity(), 720, true);
         return CustomFragment1.createTextView(inflater, "Fragment-2\nView width = 360dp\nTotal width = 720dp", 0xff00ff00);
     }
 

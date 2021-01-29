@@ -23,11 +23,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import me.jessyan.autosize.expose.AutoSizeConfig;
-import me.jessyan.autosize.expose.internal.CancelAdapt;
-import me.jessyan.autosize.expose.internal.CustomAdapt;
+import me.jessyan.autosize.external.MyAutoSize;
+
 
 /**
  * ================================================
@@ -35,9 +35,9 @@ import me.jessyan.autosize.expose.internal.CustomAdapt;
  * 写在了BaseApplication中
  * 此方案不光可以适配 {@link Activity}, 这个 {@link Activity} 下的所有 {@link Fragment}、{@link Dialog}、{@link View} 都会自动适配
  * <p>
- * 因为 AndroidAutoSize 允许每个 {@link Activity} 可以自定义适配参数, 自定义适配参数通过实现 {@link CustomAdapt},
+ * 因为 AndroidAutoSize 允许每个 {@link Activity} 可以自定义适配参数, 自定义适配参数通过实现 {@link me.jessyan.autosize.external.inface.CustomAdapt},
  * 此时这个Activity下的Fragment 和 View 都会受到影响，自动适配
- * 也可以实现 {@link CancelAdapt} 即可取消当前 Activity 的屏幕适配, 并且这个 Activity 下的所有 Fragment 和 View 都会被取消适配
+ * 也可以实现 {@link me.jessyan.autosize.external.inface.CancelAdapt} 即可取消当前 Activity 的屏幕适配, 并且这个 Activity 下的所有 Fragment 和 View 都会被取消适配
  * <p>
  * Created by JessYan on 2018/8/9 17:05
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void stop(View view) {
         Toast.makeText(getApplicationContext(), "AndroidAutoSize stops working!", Toast.LENGTH_SHORT).show();
-        AutoSizeConfig.getInstance().stop(this);
+        MyAutoSize.stop(this);
     }
 
     /**
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void restart(View view) {
         Toast.makeText(getApplicationContext(), "AndroidAutoSize continues to work", Toast.LENGTH_SHORT).show();
-        AutoSizeConfig.getInstance().restart();
+        MyAutoSize.restart();
     }
 
     /**

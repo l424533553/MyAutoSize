@@ -22,10 +22,10 @@ import java.util.Locale;
 
 import me.jessyan.autosize.expose.AutoSize;
 import me.jessyan.autosize.expose.AutoSizeConfig;
-import me.jessyan.autosize.external.ExternalAdaptInfo;
-import me.jessyan.autosize.expose.internal.CancelAdapt;
-import me.jessyan.autosize.expose.internal.CustomAdapt;
-import me.jessyan.autosize.expose.internal.OnAdaptListener;
+import me.jessyan.autosize.expose.ExternalAdaptInfo;
+import me.jessyan.autosize.external.inface.CancelAdapt;
+import me.jessyan.autosize.external.inface.CustomAdapt;
+import me.jessyan.autosize.external.inface.OnAdaptListener;
 import me.jessyan.autosize.utils.AutoSizeLog;
 
 /**
